@@ -24,5 +24,6 @@
         </activity>
         <activity android:name=".FakeRingingActivity"
             android:label="@string/title_activity_fake_ringing"></activity>
+        <receiver android:name=".MyReceiver"></receiver>
     </application>
 </manifest>
