@@ -1,4 +1,4 @@
-package com.example.thienan.fakecall;
+    package com.example.thienan.fakecall;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -6,7 +6,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -14,10 +17,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends Activity {
@@ -30,6 +37,16 @@ public class MainActivity extends Activity {
     private RadioButton secondOption;
     private RadioButton thirdOption;
 
+    private Button btnCT;
+
+    private static final Uri add = ContactsContract.Contacts.CONTENT_URI;
+    private static final String NAME = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME;
+    private static final String NUMBER = ContactsContract.CommonDataKinds.Phone.NUMBER;
+    String LOOKUP_KEY = ContactsContract.Contacts.LOOKUP_KEY;
+
+    private ListView listView;
+    private ArrayList<Contact> data;
+    private CustomAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,16 +61,24 @@ public class MainActivity extends Activity {
         secondOption = (RadioButton)findViewById(R.id.radio1);
         thirdOption = (RadioButton)findViewById(R.id.radio2);
 
+        final Intent intent = new Intent(this,showContact.class);
+
+        btnCT = (Button)findViewById(R.id.btnDB);
+        btnCT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(intent,0);
+            }
+        });
+
         Button fakeCallButton = (Button)findViewById(R.id.fakecalls);
         fakeCallButton.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                int selectedTime = 0;
-
-                int radioSelected = radioGroup.getCheckedRadioButtonId();
-                int radioTimeSelected = getSelectedAnswer(radioSelected);
-
+           int selectedTime = 0;
+           int radioSelected = radioGroup.getCheckedRadioButtonId();
+           int radioTimeSelected = getSelectedAnswer(radioSelected);
                 if(radioGroup.getCheckedRadioButtonId() == -1){
                     Toast.makeText(MainActivity.this, "You must select a time", Toast.LENGTH_SHORT).show();
                     return;
@@ -69,14 +94,23 @@ public class MainActivity extends Activity {
                     Toast.makeText(MainActivity.this, "You must both name and number", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                System.out.println("Fake name" + fakeNameEntered);
-                System.out.println("Fake number" + fakeNumberEntered);
-
                 setUpAlarm(currentFakeTime, fakeNameEntered, fakeNumberEntered);
+                end();
             }
         });
-
     }
+
+    private void end(){
+        finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Bundle d = data.getBundleExtra("data2");
+        fakeName.setText(d.getString("name"));
+        fakeNumber.setText(d.getString("number"));
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -123,9 +157,7 @@ public class MainActivity extends Activity {
         alarmManager.set(AlarmManager.RTC_WAKEUP, selectedTimeInMilliseconds, fakePendingIntent);
         Toast.makeText(getApplicationContext(), "Your fake call time has been set", Toast.LENGTH_SHORT).show();
 
-        Intent intents = new Intent(this, MainActivity.class);
-        startActivity(intents);
-
+        //Intent intents = new Intent(this, MainActivity.class);
+        //startActivity(intents);
     }
-
 }

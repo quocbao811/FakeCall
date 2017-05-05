@@ -68,6 +68,7 @@
         android:layout_alignBottom="@+id/answercall"
         android:layout_alignParentRight="true"
         android:layout_marginRight="32dp"
-        android:contentDescription="@null" />
+        android:contentDescription="@null"
+        android:background="@mipmap/ic_reject"/>
 
 </RelativeLayout>

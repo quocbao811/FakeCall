@@ -1,5 +1,6 @@
 package com.example.thienan.fakecall;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
@@ -14,7 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class FakeRingingActivity extends ActionBarActivity {
+public class FakeRingingActivity extends Activity {
 
     private String networkCarrier;
     private MediaPlayer mp;

@@ -37,22 +37,23 @@ tools:context=".MainActivity">
     android:paddingLeft="10dp"
     android:inputType="phone" />
 
-<ImageView
-    android:id="@+id/imageView1"
+<Button
+    android:id="@+id/btnDB"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_below="@+id/fakenumber"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="43dp"
     android:contentDescription="@null"
-    android:src="@mipmap/ic_launcher" />
+    android:src="@mipmap/ic_launcher"
+    android:background="@mipmap/ic_launcher"/>
 
 <RadioGroup
     android:id="@+id/radioGroup1"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
-    android:layout_below="@+id/imageView1"
+    android:layout_below="@+id/btnDB"
     android:layout_marginTop="22dp"
     android:checkedButton="@+id/radio1"
     android:orientation="horizontal" >
