@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:padding="50dp"
+        >
+
+        <TextView
+            android:id="@+id/tvAnsName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="@string/fakecallnumber"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvAnsNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+
+            android:gravity="center"
+            android:text="@string/fakecallname"
+            android:textSize="30dp" />
+    </FrameLayout>
+
+
+    <GridView
+        android:paddingTop="10dp"
+        android:id="@+id/gvGrid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns = "3"
+        />
+
+    <TextView
+        android:id="@+id/tvTimer"
+        android:textSize="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="TextView" />
+
+    <ImageButton
+        android:id="@+id/btnEndCall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:src="@mipmap/ic_endcall"
+        android:background="@mipmap/ic_endcall" />
+
+
+</LinearLayout>
